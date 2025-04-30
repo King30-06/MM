@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albert Einstein - Cursos Técnicos</title>
+    <style>
+        /* Estilos Gerais do Header */
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #1b5e1b;
+            color: white;
+            padding: 12px 15px;
+            position: relative;
+            gap: 10px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            flex: 1;
+            max-width: calc(100% - 50px);
+        }
+
+        .logo-container img {
+            width: auto;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-container h1 {
+            font-size: 1.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* Navegação */
+        nav {
+            display: none; /* Escondido por padrão no mobile */
+            width: 100%;
+            order: 3;
+        }
+
+        nav.active {
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            gap: 5px;
+        }
+
+        nav ul li {
+            width: 100%;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Botões */
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .dark-mode-btn, .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+        }
+
+        /* Media Queries para Desktop */
+        @media (min-width: 769px) {
+            header {
+                flex-wrap: nowrap;
+                padding: 15px 20px;
+                gap: 20px;
+            }
+            
+            .logo-container {
+                max-width: none;
+                flex: none;
+            }
+            
+            nav {
+                display: block;
+                width: auto;
+                order: initial;
+            }
+            
+            nav ul {
+                flex-direction: row;
+                margin: 0;
+                gap: 15px;
+            }
+            
+            nav ul li {
+                width: auto;
+            }
+            
+            nav ul li a {
+                padding: 5px 10px;
+                background-color: transparent;
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .header-buttons {
+                order: initial;
+            }
+            
+            .logo-container h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="image/logo.png" alt="Logo Albert Einstein" class="logo"></a>
+            <h1>Albert Einstein</h1>
+        </div>
+        
+        <div class="header-buttons">
+            <button class="dark-mode-btn">🌓</button>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+        
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#cursos">Nossos Cursos</a></li>
+                <li><a href="index.html#sobre">Sobre Nós</a></li>
+                <li><a href="login.html">Área do Aluno</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        // Menu Mobile
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                if(window.innerWidth <= 768) {
+                    mainNav.classList.remove('active');
+                }
+            });
+        });
+        
+        // Dark Mode
+        const darkModeBtn = document.querySelector('.dark-mode-btn');
+        
+        darkModeBtn.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+        
+        if(localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
